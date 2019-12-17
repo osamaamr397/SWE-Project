@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -33,10 +34,6 @@ public class UserAccount implements Regist,Login{
     this.username = username;
     this.password = password;
 }
-
-    public UserAccount() {
- 
-    }
 
   
     
@@ -124,7 +121,7 @@ String numberAsString = intInstance.toString();
         return null;
     }
   
-    public boolean Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
+   public boolean Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
    //File users = new File("users.txt");
         int number = Integer.parseInt(numOfProd);
      Products p=new Products (null,null,null,null,null);
@@ -259,6 +256,7 @@ String numberAsString = intInstance.toString();
             }
         }
     }
+    
  public void request(String OwnerName,String location,String number,String pass,String StoreType) throws IOException{ 
      PrintWriter writer = new PrintWriter(new FileWriter("request.txt", true));
     String newRow = OwnerName;
