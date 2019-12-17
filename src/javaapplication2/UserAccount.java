@@ -133,14 +133,16 @@ String numberAsString = intInstance.toString();
         String row = reader.readLine();
         while(row != null) {
             String[] fields = row.split(" ");
+            String CurrentProduct=fields[0];
            String currentPrice=fields[1];
            String currentCat=fields[2];
            String currentBrand=fields[4];
-            String CurrentProduct=fields[0];
+             
             if(!s.equals(CurrentProduct)) {
             return false;
         }
         if(p.getPname().equals(CurrentProduct)){
+             
             String currentQuant=fields[3];
             int QuantN=Integer.parseInt(currentQuant);
             if(QuantN>number){ 
@@ -161,17 +163,18 @@ String numberAsString = intInstance.toString();
     
     writer.println(newRow);
     writer.close();
-     int number1 = Integer.parseInt(numOfProd);
-     int number2=Integer.parseInt(currentPrice);
-     
-     System.out.println("Total Price is "+number1*number2);
+    
      
      
             }
-         
+       
         }
             
             row = reader.readLine();
+             int number1 = Integer.parseInt(numOfProd);
+     int number2=Integer.parseInt(currentPrice);
+     
+     System.out.println("Total Price is "+(number1*number2));
         }
        reader.close();
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -193,6 +196,68 @@ String numberAsString = intInstance.toString();
     writer.close();  
         return true;
           
+    }
+   public void offer(String s,String numOfProd,String Orgprice) throws FileNotFoundException, IOException{ 
+       int number1 = Integer.parseInt(Orgprice);
+     BufferedReader reader = new BufferedReader(new FileReader("userstatisic.txt"));
+     String row = reader.readLine();
+        while(row != null) {
+            String[] fields = row.split(" ");
+            String Currentuser=fields[0];
+            String currentnum=fields[3];
+            String b=" ";
+            if(currentnum.equals(b)&&this.username.equals(Currentuser)){
+             int number = Integer.parseInt(numOfProd);
+             int r=(int) (number*number1*(0.05));
+             System.out.println("Total Price is "+r);
+             String str1 = Integer.toString(r); 
+             PrintWriter writer =new PrintWriter(new FileWriter("userstatisic.txt",true));
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+             LocalDateTime now = LocalDateTime.now(); 
+             String newRow=this.username;
+        newRow = newRow.concat(" ");
+        newRow=newRow.concat(s);
+        newRow = newRow.concat(" ");
+        newRow=newRow.concat(dtf.format(now));
+         newRow = newRow.concat(" ");
+        newRow=newRow.concat("          ");
+        newRow=newRow.concat(s);
+         newRow=newRow.concat(" ");
+         newRow=newRow.concat("             ");
+         newRow=newRow.concat("              ");
+          newRow=newRow.concat(numOfProd);
+           newRow=newRow.concat(" ");
+            newRow=newRow.concat(str1);
+        writer.println(newRow);
+    writer.close();  
+             
+            }
+            else if(numOfProd.equals("2")){
+                int number = Integer.parseInt(numOfProd);
+            int r=(int) (number*number1*(0.1));
+             System.out.println("Total Price is "+r);
+              String str1 = Integer.toString(r); 
+             PrintWriter writer =new PrintWriter(new FileWriter("userstatisic.txt",true));
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+             LocalDateTime now = LocalDateTime.now(); 
+             String newRow=this.username;
+        newRow = newRow.concat(" ");
+        newRow=newRow.concat(s);
+        newRow = newRow.concat(" ");
+        newRow=newRow.concat(dtf.format(now));
+         newRow = newRow.concat(" ");
+        newRow=newRow.concat("          ");
+        newRow=newRow.concat(s);
+         newRow=newRow.concat(" ");
+         newRow=newRow.concat("             ");
+         newRow=newRow.concat("              ");
+          newRow=newRow.concat(numOfProd);
+           newRow=newRow.concat(" ");
+            newRow=newRow.concat(str1);
+        writer.println(newRow);
+    writer.close();  
+            }
+        }
     }
  public void request(String OwnerName,String location,String number,String pass,String StoreType) throws IOException{ 
      PrintWriter writer = new PrintWriter(new FileWriter("request.txt", true));
