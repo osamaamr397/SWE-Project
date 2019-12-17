@@ -14,49 +14,52 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author amr
  */
-public class StoreOwner implements Regist,Login {
-   private String  OwnerName;
-   private String  location;
-   private String number;
-   private String pass;
-   private String StoreType;
-   private String StroreProduct;
-   public StoreOwner(String OwnerName,String location,String number,String pass,String StoreType){ 
-       this.OwnerName=OwnerName;
-       this.location=location;
-       this.number=number;
-       this.pass=pass;
-       this.StoreType=StoreType;
-       
-   }
+public class StoreOwner implements Regist, Login {
 
-    public StoreOwner() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String OwnerName;
+    private String location;
+    private String number;
+    private String pass;
+    private String StoreType;
+    private String StroreProduct;
+
+    public StoreOwner(String OwnerName, String location, String number, String pass, String StoreType) {
+        this.OwnerName = OwnerName;
+        this.location = location;
+        this.number = number;
+        this.pass = pass;
+        this.StoreType = StoreType;
+
     }
-   
-    public boolean login(String OwnerName,String pass) throws FileNotFoundException, IOException{ 
-    BufferedReader reader=new BufferedReader(new FileReader("storeowners.txt"));
-    String row=reader.readLine();
-    while(row!=null){ 
-    String[]fields=row.split(" "); 
-    String CurrentOwner=fields[0];
-     if(OwnerName.equals(CurrentOwner)){ 
-         String CurrentPass=fields[1];
-         if(pass.equals(CurrentPass)){ 
-         return true;
-         }
-     }
-    row = reader.readLine();
+
+    public boolean login(String OwnerName, String pass) throws FileNotFoundException, IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("storeowners.txt"));
+        String row = reader.readLine();
+        while (row != null) {
+            String[] fields = row.split(" ");
+            String CurrentOwner = fields[0];
+            if (OwnerName.equals(CurrentOwner)) {
+                String CurrentPass = fields[1];
+                if (pass.equals(CurrentPass)) {
+                    return true;
+                }
+            }
+            row = reader.readLine();
+        }
+        return false;
     }
-    return false;
-    }
-	
-	  public void addToStore(String pro, String quan) throws FileNotFoundException, IOException {
+
+    public void addToStore(String pro, String quan) throws FileNotFoundException, IOException {
         BufferedReader reader = new BufferedReader(new FileReader("products.txt"));
         String row = reader.readLine();
         while (row != null) {
@@ -109,80 +112,146 @@ public class StoreOwner implements Regist,Login {
         row=reader.readLine();
         }
     }
-	
-    public boolean Register(String OwnerName,String location,String number,String pass,String StoreType) throws FileNotFoundException, IOException{
-    BufferedReader reader=new BufferedReader(new FileReader("storeowners.txt"));
-    String row=reader.readLine();
-    while(row!=null){ 
-    String []fields=row.split(" ");
-    String CurrentOwner=fields[0];
-    if(OwnerName.equals(CurrentOwner)){ 
-    String CurrentNumber=fields[2];
-    if(number.equals(CurrentNumber)){ 
-    return false;
+    public boolean Register(String OwnerName, String location, String number, String pass, String StoreType) throws FileNotFoundException, IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("storeowners.txt"));
+        String row = reader.readLine();
+        while (row != null) {
+            String[] fields = row.split(" ");
+            String CurrentOwner = fields[0];
+            if (OwnerName.equals(CurrentOwner)) {
+                String CurrentNumber = fields[2];
+                if (number.equals(CurrentNumber)) {
+                    return false;
+                }
+            }
+            row = reader.readLine();
+        }
+        reader.close();
+        PrintWriter writer = new PrintWriter(new FileWriter("storeowners.txt", true));
+        String newRow = OwnerName;
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(location);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(number);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(pass);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(StoreType);
+        writer.println(newRow);
+        writer.close();
+        return true;
     }
-    }
-    row=reader.readLine();
-    }
-    reader.close();
-    PrintWriter writer = new PrintWriter(new FileWriter("storeowners.txt", true));
-    String newRow = OwnerName;
-    newRow = newRow.concat(" ");
-    newRow = newRow.concat(location);
-    newRow=newRow.concat(" ");
-    newRow=newRow.concat(number);
-    newRow=newRow.concat(" ");
-    newRow=newRow.concat(pass);
-    newRow=newRow.concat(" ");
-    newRow=newRow.concat(StoreType);
-    writer.println(newRow);
-    writer.close();
-    return true;
-    }
-    
-    public void StoreProduct() throws FileNotFoundException, IOException{ 
-    FileInputStream instream = null;
-	FileOutputStream outstream = null;
- 
-    	try{
-    	    File infile =new File("AdminProducts.txt");
-    	    File outfile =new File("products.txt");
- 
-    	    instream = new FileInputStream(infile);
-    	    outstream = new FileOutputStream(outfile);
- 
-    	    byte[] buffer = new byte[1024];
- 
-    	    int length;
-    	    /*copying the contents from input stream to
-    	     * output stream using read and write methods
-    	     */
-    	    while ((length = instream.read(buffer)) > 0){
-    	    	outstream.write(buffer, 0, length);
-    	    }
 
-    	    //Closing the input/output file streams
-    	    instream.close();
-    	    outstream.close();
+    public void StoreProduct() throws FileNotFoundException, IOException {
+        FileInputStream instream = null;
+        FileOutputStream outstream = null;
 
-    	    System.out.println("File copied successfully!!");
- 
-    	}catch(IOException ioe){
-    		ioe.printStackTrace();
-    	 }
-}
-    public void view () throws FileNotFoundException, IOException{ 
-    BufferedReader reader=new BufferedReader(new FileReader("userstatisic.txt"));
-    String line;
-while((line = reader.readLine()) != null)
-{
-    System.out.println(line);
-}
-reader.close();
+        try {
+            File infile = new File("AdminProducts.txt");
+            File outfile = new File("products.txt");
+
+            instream = new FileInputStream(infile);
+            outstream = new FileOutputStream(outfile);
+
+            byte[] buffer = new byte[1024];
+
+            int length;
+            /*copying the contents from input stream to
+             * output stream using read and write methods
+             */
+            while ((length = instream.read(buffer)) > 0) {
+                outstream.write(buffer, 0, length);
+            }
+
+            //Closing the input/output file streams
+            instream.close();
+            outstream.close();
+
+            System.out.println("File copied successfully!!");
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
-    public void deactivateAccount()
-    {
+
+    public void view() throws FileNotFoundException, IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("userstatisic.txt"));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+    }
+
+    public void deactivateAccount() {
         boolean active = false;
+    }
+
+    public boolean addcollaborator(String B) throws FileNotFoundException, IOException {
+        collaborators coll = new collaborators(null, null, null, null, null, null);
+        BufferedReader reader = new BufferedReader(new FileReader("collaborators.txt"));
+        String row = reader.readLine();
+        while (row != null) {
+            String[] fields = row.split(" ");
+            String currentcoll = fields[0];
+            if (B.equals(currentcoll)) {
+                System.out.println("Brand already Exist");
+                return false;
+
+            }
+            row = reader.readLine();
+        }
+        reader.close();
+        PrintWriter writer = new PrintWriter(new FileWriter("collaborators.txt", true));
+        String name, pass, location, number, StoreType, originals;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Username: ");
+        name = input.nextLine();
+        coll.setName(name);
+        System.out.println("pass: ");
+        pass = input.nextLine();
+        coll.setPass(pass);
+        System.out.println("Location: ");
+        location = input.nextLine();
+        coll.setLocation(location);
+        System.out.println("number: ");
+        number = input.nextLine();
+        coll.setNumber(number);
+        System.out.println("StroreType: ");
+        StoreType = input.nextLine();
+        coll.setStoreType(StoreType);
+        System.out.println("original: ");
+        originals = input.nextLine();
+        coll.setOriginals(originals);
+        String newRow = B;
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(location);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(number);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(pass);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(StoreType);
+        newRow = newRow.concat(" ");
+        newRow = newRow.concat(this.getOwnerName());
+        writer.println(newRow);
+        writer.close();
+        System.out.println("collaborators is added");
+        return true;
+    }
+
+    public void live() throws IOException {
+        Adminstrator s = new Adminstrator();
+        s.live();
+    }
+
+    public String getOwnerName() {
+        return OwnerName;
+    }
+
+    public void setOwnerName(String OwnerName) {
+        this.OwnerName = OwnerName;
     }
 
     @Override
@@ -194,7 +263,5 @@ reader.close();
     public boolean login() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    }
-   
-    
 
+}
