@@ -55,6 +55,61 @@ public class StoreOwner implements Regist,Login {
     }
     return false;
     }
+	
+	  public void addToStore(String pro, String quan) throws FileNotFoundException, IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("products.txt"));
+        String row = reader.readLine();
+        while (row != null) {
+            String[] fields = row.split(" ");
+            String CurrentProduct = fields[0];
+            String Pprice = fields[1];
+            String Pcat = fields[2];
+            String Brand = fields[4];
+
+            if (pro.equals(CurrentProduct)) {
+                PrintWriter writer = new PrintWriter(new FileWriter("StoreProducts.txt", true));
+                String newRow = pro;
+                newRow = newRow.concat(" ");
+                newRow = newRow.concat(Pprice);
+                newRow = newRow.concat(" ");
+                newRow = newRow.concat(Pcat);
+                newRow = newRow.concat(" ");
+                newRow = newRow.concat(quan);
+                newRow = newRow.concat(" ");
+                newRow = newRow.concat(Brand);
+                newRow = newRow.concat(" ");
+                newRow = newRow.concat(this.OwnerName);
+                writer.println(newRow);
+                writer.close();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                PrintWriter riter = new PrintWriter(new FileWriter("StoreStatisics.txt", true));
+                String newrow = this.OwnerName;
+                newrow = newrow.concat(" ");
+                newrow = newrow.concat(pro);
+                newrow = newrow.concat(" ");
+                newrow = newrow.concat(quan);
+                newrow = newrow.concat(" ");
+                newrow = newrow.concat(dtf.format(now));
+                riter.println(newRow);
+                riter.close();
+
+            }
+        }
+    }
+    public void StoreStat() throws FileNotFoundException, IOException{ 
+     BufferedReader reader=new BufferedReader(new FileReader("StoreStatisics.txt"));
+        String row=reader.readLine();
+        while(row!=null){ 
+        String[] fields=row.split(" ");
+        String Currentname=fields[0];
+        if(this.OwnerName.equals(Currentname)){
+         System.out.println(row);
+        }
+        row=reader.readLine();
+        }
+    }
+	
     public boolean Register(String OwnerName,String location,String number,String pass,String StoreType) throws FileNotFoundException, IOException{
     BufferedReader reader=new BufferedReader(new FileReader("storeowners.txt"));
     String row=reader.readLine();
