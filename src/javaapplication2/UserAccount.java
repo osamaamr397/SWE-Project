@@ -121,31 +121,33 @@ String numberAsString = intInstance.toString();
         return null;
     }
   
-   public boolean Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
+   public int Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
    //File users = new File("users.txt");
         int number = Integer.parseInt(numOfProd);
+          
      Products p=new Products (null,null,null,null,null);
-     p.setPname(s);
+p.setPname(s);
+String pro=p.getPname();
         BufferedReader reader = new BufferedReader(new FileReader("products.txt"));
         String row = reader.readLine();
         while(row != null) {
             String[] fields = row.split(" ");
-            String CurrentProduct=fields[0];
            String currentPrice=fields[1];
            String currentCat=fields[2];
-           String currentBrand=fields[4];
-             
-            if(!s.equals(CurrentProduct)) {
-            return false;
+          
+            String CurrentProduct=fields[0];
+            if(!pro.equals(CurrentProduct)) {
+           System.out.println("not found");
         }
-        if(p.getPname().equals(CurrentProduct)){
-             
+      else  {
+                     String currentPr=fields[1];
+ int number1 = Integer.parseInt(currentPr);
             String currentQuant=fields[3];
             int QuantN=Integer.parseInt(currentQuant);
             if(QuantN>number){ 
                 QuantN=QuantN-number;
                    String str1 = Integer.toString(QuantN); 
-
+System.out.println("Total Price is "+number*number1);
  PrintWriter writer = new PrintWriter(new FileWriter("products.txt"));
     String newRow = CurrentProduct;
     newRow = newRow.concat(" ");
@@ -155,25 +157,24 @@ String numberAsString = intInstance.toString();
     newRow=newRow.concat(" ");
     newRow=newRow.concat(str1);
     newRow=newRow.concat(" ");
-     newRow=newRow.concat(currentBrand);
+    // newRow=newRow.concat(currentBrand);
     newRow=newRow.concat(" ");
     
     writer.println(newRow);
     writer.close();
-    
+     
+     
+   
      
      
             }
-       
+         
         }
             
             row = reader.readLine();
-             int number1 = Integer.parseInt(numOfProd);
-     int number2=Integer.parseInt(currentPrice);
-     
-     System.out.println("Total Price is "+(number1*number2));
-        }
+        
        reader.close();
+        }
           DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
    LocalDateTime now = LocalDateTime.now(); 
         PrintWriter writer =new PrintWriter(new FileWriter("userstatisic.txt",true));
@@ -191,7 +192,7 @@ String numberAsString = intInstance.toString();
           newRow=newRow.concat(numOfProd);
         writer.println(newRow);
     writer.close();  
-        return true;
+        return 1;
           
     }
    public void offer(String s,String numOfProd,String Orgprice) throws FileNotFoundException, IOException{ 
