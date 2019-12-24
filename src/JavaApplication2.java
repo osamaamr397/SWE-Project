@@ -24,122 +24,9 @@ public class JavaApplication2 {
      */
     public static void main(String[] args) throws IOException {
       Scanner input = new Scanner (System.in); 
-        Adminstrator A=new Adminstrator("amr","infui");
-       UserAccount U = new UserAccount();
-       StoreOwner S=new StoreOwner();
-      
        String username = null;
       String password=null;
       System.out.println("Welcome to our store");
- System.out.println(" if you have an account whrite (1) to login  "+" if not whrite (2) to rejest ");
-        int enter_way= input.nextInt();
-      if(enter_way==1){
-           System.out.println("Please allow choose your login:" 
-     +"\n" + " (1) as  user "  + "\n"+ "(2) as  Adminstrator" +"\n" + "(3 as StoreOwner" );
-       System.out.println("enter your choose:");
-        int login_type= input.nextInt();
-    
-        switch(login_type){
-             case 1:
-                 System.out.println("\nEnter your username and password to login to your account.");
-                 System.out.println("Username: ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-       
-        if(U.login(username, password)==true){ 
-        System.out.println(" you are login Succesfuly");
-        }else{
-        System.out.println("your username or password are not correct");
-        }
-        break;
-             case 2:
-                 System.out.println("\nEnter your username and password to login to your account.");
-                 System.out.println("Username: ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-                 if(A.login(username, password)==true){
-                     System.out.println("welcome admin");
-                 }else{ 
-                     System.out.println("please try again");
-                 }
-                 break;
-             
-             case 3:
-                  System.out.println("\nEnter your username and password to login to your account.");
-                 System.out.println("Username: ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-                 if(S.login(username, password)==true){
-                     System.out.println("welcome store owner");
-                 }else{ 
-                     System.out.println("faild login");
-                 }
-           break;
-         }
-      }
-      else{
-          
-      System.out.println("Please allow choose your rejeste :" 
-     +"\n" + " (1) as  user "  + "\n"+ "(2) as  Adminstrator" +"\n" + "(3 as StoreOwner" );
-       System.out.println("enter your choose:");
-        int rejest_type= input.nextInt();
-    
-        switch(rejest_type){
-             case 1:
-                 System.out.println("to rejest our website blease whrite next form:");
-                 System.out.println("Username: ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-       
-        if(U.Register(username, password)==true){ 
-        System.out.println(" you are rejest as user Succesfuly");
-        }else{
-        System.out.println(" not correct plese try again");
-        
-        }
-        break;
-             case 2:
-              System.out.println("to rejest our website blease whrite next form:");
-                 System.out.println("admin name: ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-       
-        if(A.Register(username, password)==true){ 
-        System.out.println(" you are rejest to admin  Succesfuly");
-        }else{
-        System.out.println(" invalid admin name or pass plese try again");
-        }
-                 break;
-             
-             case 3:
-                 System.out.println("to rejest our website blease whrite next form:");
-                 System.out.println("storeowner name : ");
-                 username = input.nextLine();
-                    password = input.nextLine();
-                System.out.println("Password: ");
-                password = input.nextLine();
-       
-        if(S.Register(username, password, password, password, username)==true){ 
-        System.out.println(" you are rejest to store owner Succesfuly");
-        }else{
-        System.out.println(" not correct storeowner name or password please try again");
-        }
-           break;
-         }
-           //login_class L=new login_class("mokhtar","mokhtar");
-      }
-
-/*
       System.out.println("\nEnter your username and password to login to your account.");   
       
 //in case of user
@@ -161,8 +48,10 @@ public class JavaApplication2 {
         //in case of reg
   
  
-   user.search("bmw");
+  // user.search("bmw");
    user.Buy("bmw","2");
+  // user.offer("bmw","2" ,"25000000" );
+   /*
    String s=user.getusername();
    user.request(s, "absia  ", "258908569 ", "1234 ", "clothes");
    Adminstrator p=new Adminstrator("mohamed","258908569");
@@ -174,12 +63,13 @@ public class JavaApplication2 {
    
        
     p.live();
+   */
     }
   // TODO code application logic here
     }
     
 
-*/
+
 
 /*
       StoreOwner d=new StoreOwner("fnuif","nfuf","kngg","jbgujg","jbg","fjbf");
@@ -294,4 +184,3 @@ System.out.println("Username: ");
     //    StoreOwner s=new StoreOwner(null,null,null,null,null);//when i comment all above to make admin work
          s.StoreProduct();
 */
-    }}
