@@ -1,7 +1,8 @@
-
+name productname DateAndTime #ofusers productbought qunantitybought
 amr bmw 2019/12/17 12:57:08 1
 amr bmw 2019/12/17 12:58:30 1
 amr bmw 2019/12/17 12:59:19 1
 amr bmw 2019/12/17 13:01:17 1
 amr bmw 2019/12/17 13:02:39 1
 amr bmw 2019/12/17 13:03:41 1
+amr bmw 2019/12/24 18:30:37           bmw                            2
