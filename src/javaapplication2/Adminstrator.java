@@ -33,6 +33,7 @@ public class Adminstrator implements Regist,Login {
     this.Aname=Aname;
     this.Apass=Apass;
     }
+    public Adminstrator(){}
     
     public boolean login(String Aname, String Apass) throws FileNotFoundException, IOException {
         
@@ -173,6 +174,7 @@ public class Adminstrator implements Regist,Login {
     newRow = newRow.concat(" ");
     writer.println(newRow);
     writer.close();
+    
     System.out.println("Brand is added");
     return true;
     }

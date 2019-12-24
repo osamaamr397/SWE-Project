@@ -7,9 +7,8 @@ package javaapplication2;
 
 /**
  *
- * @author amr
+ * @author mmmoohhaammmeeeedd
  */
-public interface Regist {
-    boolean Register();
+public class EntityOwners {
     
 }

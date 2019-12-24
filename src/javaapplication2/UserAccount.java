@@ -121,7 +121,7 @@ String numberAsString = intInstance.toString();
         return null;
     }
   
-   public int Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
+   public boolean Buy(String s,String numOfProd) throws FileNotFoundException, IOException{ 
    //File users = new File("users.txt");
         int number = Integer.parseInt(numOfProd);
           
@@ -137,7 +137,7 @@ String pro=p.getPname();
           
             String CurrentProduct=fields[0];
             if(!pro.equals(CurrentProduct)) {
-           System.out.println("not found");
+           return false;
         }
       else  {
                      String currentPr=fields[1];
@@ -147,7 +147,7 @@ String pro=p.getPname();
             if(QuantN>number){ 
                 QuantN=QuantN-number;
                    String str1 = Integer.toString(QuantN); 
-System.out.println("Total Price is "+number*number1);
+System.out.println("Total Price is "+number*number1+"$");
  PrintWriter writer = new PrintWriter(new FileWriter("products.txt"));
     String newRow = CurrentProduct;
     newRow = newRow.concat(" ");
@@ -188,11 +188,11 @@ System.out.println("Total Price is "+number*number1);
         newRow=newRow.concat(s);
          newRow=newRow.concat(" ");
          newRow=newRow.concat("             ");
-         newRow=newRow.concat("              ");
+         newRow=newRow.concat("            ");
           newRow=newRow.concat(numOfProd);
         writer.println(newRow);
     writer.close();  
-        return 1;
+        return true;
           
     }
    public void offer(String s,String numOfProd,String Orgprice) throws FileNotFoundException, IOException{ 
@@ -202,7 +202,7 @@ System.out.println("Total Price is "+number*number1);
         while(row != null) {
             String[] fields = row.split(" ");
             String Currentuser=fields[0];
-            String currentnum=fields[3];
+            String currentnum=fields[5];
             String b=" ";
             if(currentnum.equals(b)&&this.username.equals(Currentuser)){
              int number = Integer.parseInt(numOfProd);
