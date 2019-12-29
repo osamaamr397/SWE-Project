@@ -168,10 +168,10 @@ System.out.println("Total Price is "+number*number1);
      
      
             }
-         
+         row = reader.readLine();
         }
             
-            row = reader.readLine();
+      
         
        reader.close();
         }
