@@ -34,6 +34,10 @@ public class Adminstrator implements Regist,Login {
     this.Apass=Apass;
     }
     
+	Adminstrator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+	
     public boolean login(String Aname, String Apass) throws FileNotFoundException, IOException {
         
         BufferedReader reader = new BufferedReader(new FileReader("Adminstrator.txt"));
